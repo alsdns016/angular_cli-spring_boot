@@ -44,5 +44,9 @@ public class WebRestController {
         return postsService.findPost(postsId);
     }
 
+    @PutMapping("/posts/{postsId}")
+    public Posts updatePost(@PathVariable Long postsId, @RequestBody Posts posts){
+        return postsService.updatePost(postsId, posts);
+    }
 
 }

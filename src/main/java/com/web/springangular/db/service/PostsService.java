@@ -40,6 +40,20 @@ public class PostsService {
         return postsRepository.findById(postsId);
     }
 
+    @Transactional
+    public Posts updatePost(Long postId , Posts updateData){
+
+        Optional<Posts> optionPost = postsRepository.findById(postId);
+
+        Posts posts = optionPost.get();
+
+        posts.setTitle(updateData.getTitle());
+        posts.setContent(updateData.getContent());
+
+        postsRepository.save(posts);
+
+        return  posts;
+    }
 
 
 }

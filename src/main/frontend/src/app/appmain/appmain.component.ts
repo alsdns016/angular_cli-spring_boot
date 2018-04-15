@@ -25,21 +25,18 @@ interface dbposts {
 })
 export class AppmainComponent implements OnInit {
 
-  posts : Post[] = [];
-
-  datas:Post[];
+  posts:Post[];
 
   displayedColumns = ['title', 'content', 'author'];
   dataSource;
-  dbdatas: dbposts[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private http: HttpClient) {
     this.http.get<dbposts[]>('/postLists')
       .subscribe(res => {
-        this.dbdatas = res;
-        this.dataSource = new MatTableDataSource<dbposts>(this.dbdatas);
+        this.posts = res;
+        this.dataSource = new MatTableDataSource<dbposts>(this.posts);
         this.dataSource.paginator = this.paginator;
       });
   }
