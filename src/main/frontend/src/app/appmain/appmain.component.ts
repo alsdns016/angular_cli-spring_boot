@@ -27,18 +27,44 @@ export class AppmainComponent implements OnInit {
 
   posts:Post[];
 
-  displayedColumns = ['title', 'content', 'author'];
+  displayedColumns = ['title', 'content', 'author', 'delete'];
   dataSource;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private http: HttpClient) {
+
     this.http.get<dbposts[]>('/postLists')
       .subscribe(res => {
         this.posts = res;
         this.dataSource = new MatTableDataSource<dbposts>(this.posts);
         this.dataSource.paginator = this.paginator;
+        console.log('@@@@ res' , res);
+        console.log('@@@@ this.dataSource',this.dataSource);
+        console.log('@@@@ this.posts',this.posts);
       });
+
+  }
+
+  deletePost(postId){
+    console.log('@@@@ 클릭!!',postId);
+    var href = '/posts/{'+postId+'}';
+    console.log('@@@@ href' , href);
+
+    this.http.delete('posts/{10016}')
+      .subscribe(res => {
+        console.log('@@@@ res' ,res);
+      })
+  }
+
+  searchPost(postId){
+    console.log("@@@@ 검색클릭!!" , postId);
+
+    this.http.get('posts/{10016}')
+      .subscribe(res => {
+        console.log('@@@@ res' ,res);
+      })
+
   }
 
 /*

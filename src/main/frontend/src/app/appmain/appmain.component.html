@@ -4,8 +4,9 @@
   appmain works222!
   {{posts1}}
 </p>
-
 <h1> Data1</h1>
+
+
 
 <div class="example-container mat-elevation-z8">
   <mat-table class="list-table-style" #table [dataSource]="dataSource">
@@ -23,6 +24,14 @@
     <ng-container matColumnDef="author">
       <mat-header-cell *matHeaderCellDef> AUTHOR </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.author}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> 삭제 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        id : {{element.id}}
+        <button mat-button (click)="deletePost(element.id)" >삭제</button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row class="list-header-style"
